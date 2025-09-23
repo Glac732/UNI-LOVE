@@ -7,35 +7,59 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 <style>
+/* Global Reset */
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-body{background:#1b1b2f;color:#fff;overflow-x:hidden;}
+body{background:#0b0b1b;color:#fff;overflow-x:hidden;scroll-behavior:smooth;position:relative;}
 a{text-decoration:none;color:inherit;}
-.container{max-width:1200px;margin:0 auto;padding:20px;position:relative;}
-header{display:flex;justify-content:space-between;align-items:center;padding:20px;}
+.container{max-width:1200px;margin:0 auto;padding:20px;position:relative;z-index:2;}
+/* Header */
+header{display:flex;justify-content:space-between;align-items:center;padding:20px;position:sticky;top:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(5px);z-index:999;}
 .logo{display:flex;align-items:center;gap:10px;}
-.logo-icon{font-size:2rem;color:#ff4d94;}
+.logo-icon{font-size:2rem;color:#ff4d94;animation:pulse 2s infinite;}
 .logo-text{font-size:1.8rem;font-weight:700;background:linear-gradient(45deg,#ff6b9d,#ff4d94);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
 nav ul{display:flex;gap:20px;list-style:none;}
-nav a{position:relative;padding:5px 0;font-weight:500;}
+nav a{position:relative;padding:5px 0;font-weight:500;transition:.3s;}
 nav a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:#ff4d94;transition:.3s;}
 nav a:hover::after{width:100%;}
-.hero{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:80vh;position:relative;}
-.hero-title{font-size:3rem;font-weight:700;background:linear-gradient(45deg,#ff4d94,#ff2f8f);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 10px #ff4d94;animation:glow 2s infinite alternate;}
-.hero-subtitle{font-size:1.2rem;margin:20px 0;max-width:600px;line-height:1.5;}
-.cta-button{padding:12px 35px;border-radius:50px;font-weight:600;color:#fff;background:linear-gradient(45deg,#5865f2,#4752c4);margin:5px;transition:.3s;}
-.cta-button:hover{transform:translateY(-4px);box-shadow:0 0 15px #5865f2;}
-.features{padding:80px 0;}
-.section-title{text-align:center;font-size:2rem;margin-bottom:50px;color:#ff4d94;}
+/* Hero */
+.hero{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:90vh;position:relative;z-index:1;}
+.hero-title{font-size:3.5rem;font-weight:700;background:linear-gradient(45deg,#ff4d94,#ff2f8f);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 20px #ff4d94;animation:glow 2s infinite alternate;}
+.hero-subtitle{font-size:1.3rem;margin:20px 0;max-width:700px;line-height:1.5;}
+.cta-button{padding:14px 40px;border-radius:50px;font-weight:600;color:#fff;margin:10px;transition:.3s;position:relative;overflow:hidden;}
+.cta-button:hover{transform:translateY(-5px);box-shadow:0 0 20px #ff4d94;}
+.cta-button::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent);transition:.5s;z-index:-1;}
+.cta-button:hover::before{left:100%;}
+.discord-button{background:linear-gradient(45deg,#5865f2,#4752c4);box-shadow:0 0 15px #5865f2;}
+.discord-button:hover{box-shadow:0 0 25px #5865f2;}
+/* Features/Events */
+.features{padding:80px 0;position:relative;}
+.section-title{text-align:center;font-size:2rem;margin-bottom:50px;background:linear-gradient(45deg,#ff4d94,#ff2f8f);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 10px #ff4d94;}
 .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;}
-.feature-card{background:rgba(255,255,255,0.05);padding:25px;border-radius:15px;text-align:center;transition:.3s;}
+.feature-card{background:rgba(255,255,255,0.05);padding:25px;border-radius:15px;text-align:center;transition:.3s;position:relative;overflow:hidden;opacity:0;transform:translateY(30px);}
+.feature-card::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(45deg,#ff4d94,#ff2f8f);opacity:0.2;pointer-events:none;z-index:-1;}
 .feature-card:hover{transform:translateY(-8px);box-shadow:0 0 20px #ff4d94;}
 .feature-icon{font-size:2.5rem;margin-bottom:15px;color:#ff4d94;}
+/* Footer */
 footer{text-align:center;padding:40px 0;border-top:1px solid rgba(255,255,255,0.1);}
 .social-links{display:flex;justify-content:center;gap:15px;margin-bottom:15px;}
-.social-link{width:45px;height:45px;border-radius:50%;display:flex;justify-content:center;align-items:center;background:linear-gradient(45deg,#ff4d94,#ff2f8f);}
-#particles-js{position:fixed;width:100%;height:100%;top:0;left:0;z-index:-1;}
+.social-link{width:45px;height:45px;border-radius:50%;display:flex;justify-content:center;align-items:center;background:linear-gradient(45deg,#ff4d94,#ff2f8f);transition:.3s;}
+.social-link:hover{transform:translateY(-5px);box-shadow:0 0 15px #ff4d94;}
+/* Particles & Hearts */
+#particles-js{position:fixed;width:100%;height:100%;top:0;left:0;z-index:0;}
+.heart{position:absolute;width:20px;height:20px;opacity:0;animation:fall 5s linear infinite, float 3s ease-in-out infinite alternate;}
+.heart::before,.heart::after{content:'';position:absolute;width:100%;height:100%;background:#ff4d94;border-radius:50%;}
+.heart::before{top:-50%;left:0;}
+.heart::after{top:0;left:-50%;}
+/* Animations */
+@keyframes pulse{0%{transform:scale(1);}50%{transform:scale(1.1);}100%{transform:scale(1);}}
 @keyframes glow{0%{text-shadow:0 0 10px #ff4d94;}100%{text-shadow:0 0 25px #ff2f8f,0 0 40px #ff4d94;}}
-@media(max-width:768px){.hero-title{font-size:2rem;}.hero-subtitle{font-size:1rem;}.features-grid{grid-template-columns:1fr;}}
+@keyframes fall{0%{transform:translateY(-100vh) rotate(0deg);opacity:1;}100%{transform:translateY(100vh) rotate(360deg);opacity:0;}}
+@keyframes float{0%{transform:translateX(0);}100%{transform:translateX(20px);}}
+/* Scroll Animations */
+.fade-in{animation:fadeInUp 1s forwards;}
+@keyframes fadeInUp{0%{opacity:0;transform:translateY(30px);}100%{opacity:1;transform:translateY(0);}}
+/* Responsive */
+@media(max-width:768px){.hero-title{font-size:2.5rem;}.hero-subtitle{font-size:1rem;}.features-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -46,7 +70,7 @@ footer{text-align:center;padding:40px 0;border-top:1px solid rgba(255,255,255,0.
 <nav>
 <ul>
 <li><a href="#hero">Home</a></li>
-<li><a href="#features">About</a></li>
+<li><a href="#features">Events</a></li>
 <li><a href="https://discord.gg/TEE79RXppx" target="_blank">Join</a></li>
 </ul>
 </nav>
@@ -54,33 +78,17 @@ footer{text-align:center;padding:40px 0;border-top:1px solid rgba(255,255,255,0.
 
 <section class="hero" id="hero">
 <h1 class="hero-title">UNI LOVE DISCORD</h1>
-<p class="hero-subtitle">Join the most loving Discord community! Crypto events, OWO games, giveaways, and more every week!</p>
-<a href="https://discord.gg/TEE79RXppx" class="cta-button" target="_blank">Join Now <i class="fab fa-discord"></i></a>
+<p class="hero-subtitle">Join the most loving community! Crypto events, OWO games, Giveaways, and more every week!</p>
+<a href="https://discord.gg/TEE79RXppx" class="cta-button discord-button" target="_blank">Join Now <i class="fab fa-discord"></i></a>
 </section>
 
 <section class="features" id="features">
 <h2 class="section-title">Events & Features</h2>
 <div class="features-grid">
-<div class="feature-card">
-<div class="feature-icon"><i class="fas fa-coins"></i></div>
-<h3>Crypto Events</h3>
-<p>Win crypto and join exciting community challenges with rewards!</p>
-</div>
-<div class="feature-card">
-<div class="feature-icon"><i class="fas fa-ghost"></i></div>
-<h3>OWO Games</h3>
-<p>Participate in OWO events for fun and exclusive rewards!</p>
-</div>
-<div class="feature-card">
-<div class="feature-icon"><i class="fas fa-gift"></i></div>
-<h3>Giveaways</h3>
-<p>Regular giveaways of Nitro, roles, and other special surprises!</p>
-</div>
-<div class="feature-card">
-<div class="feature-icon"><i class="fas fa-users"></i></div>
-<h3>Friendly Community</h3>
-<p>Meet kind people from around the world in a welcoming environment.</p>
-</div>
+<div class="feature-card fade-in"><div class="feature-icon"><i class="fas fa-coins"></i></div><h3>Crypto Events</h3><p>Win crypto and join exciting challenges!</p></div>
+<div class="feature-card fade-in"><div class="feature-icon"><i class="fas fa-ghost"></i></div><h3>OWO Games</h3><p>Participate in OWO events and get rewards!</p></div>
+<div class="feature-card fade-in"><div class="feature-icon"><i class="fas fa-gift"></i></div><h3>Giveaways</h3><p>Regular Nitro, role, and surprise giveaways!</p></div>
+<div class="feature-card fade-in"><div class="feature-icon"><i class="fas fa-users"></i></div><h3>Friendly Community</h3><p>Meet kind people from around the world.</p></div>
 </div>
 </section>
 
@@ -96,22 +104,23 @@ footer{text-align:center;padding:40px 0;border-top:1px solid rgba(255,255,255,0.
 
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 <script>
+// Particles
 particlesJS('particles-js',{
-particles:{
-number:{value:60,density:{enable:true,value_area:800}},
-color:{value:"#ff4d94"},
-shape:{type:"circle"},
-opacity:{value:0.5,random:true},
-size:{value:3,random:true},
-line_linked:{enable:true,distance:150,color:"#ff4d94",opacity:0.4,width:1},
-move:{enable:true,speed:2,direction:"none",random:true,out_mode:"out"}
-},
-interactivity:{
-detect_on:"canvas",
-events:{onhover:{enable:true,mode:"repulse"},onclick:{enable:true,mode:"push"},resize:true}
-},
+particles:{number:{value:60,density:{enable:true,value_area:800}},color:{value:"#ff4d94"},shape:{type:"circle"},opacity:{value:0.5,random:true},size:{value:3,random:true},line_linked:{enable:true,distance:150,color:"#ff4d94",opacity:0.4,width:1},move:{enable:true,speed:2,direction:"none",random:true,out_mode:"out"}},
+interactivity:{detect_on:"canvas",events:{onhover:{enable:true,mode:"repulse"},onclick:{enable:true,mode:"push"},resize:true}},
 retina_detect:true
 });
+
+// Floating Hearts
+function createHearts(){
+const body=document.body;
+for(let i=0;i<30;i++){
+const heart=document.createElement('div');heart.classList.add('heart');
+const size=Math.random()*20+10,left=Math.random()*100,animD=Math.random()*5+5,animDelay=Math.random()*5,hue=Math.random()*360;
+heart.style.width=`${size}px`;heart.style.height=`${size}px`;heart.style.left=`${left}vw`;heart.style.animationDuration=`${animD}s`;heart.style.animationDelay=`${animDelay}s`;heart.style.backgroundColor=`hsl(${hue},100%,65%)`;
+body.appendChild(heart);
+}}
+window.addEventListener('load',()=>{createHearts();});
 </script>
 </body>
 </html>
